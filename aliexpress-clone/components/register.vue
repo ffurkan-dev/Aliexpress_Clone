@@ -126,23 +126,24 @@
     </div>
   </template>
   
-  <script>
-  export default {
+  <script lang="ts">
+  import { defineComponent } from "vue";
+  
+  export default defineComponent({
     data() {
       return {
-        email: '',
-        isValidEmail: false,
+        email: "" as string,
+        isValidEmail: false as boolean,
       };
     },
     methods: {
-      validateEmail() {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      validateEmail(): void {
+        const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         this.isValidEmail = emailRegex.test(this.email);
       },
-      handleSocialMediaLogin(platform) {
+      handleSocialMediaLogin(platform: string): void {
         alert(`Logging in with ${platform}`);
       },
     },
-  };
+  });
   </script>
-  
