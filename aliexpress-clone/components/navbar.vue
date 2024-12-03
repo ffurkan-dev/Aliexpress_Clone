@@ -40,7 +40,7 @@
                   <g id="SVGRepo_iconCarrier">
                     <g>
                       <path
-                        d="m495,466.1l-119.2-119.2c29.1-35.5 46.5-80.8 46.5-130.3 0-113.5-92.1-205.6-205.6-205.6-113.6,0-205.7,92.1-205.7,205.7s92.1,205.7 205.7,205.7c49.4,0 94.8-17.4 130.3-46.5l119.1,119.1c8,8 20.9,8 28.9,0 8-8 8-20.9 0-28.9zm-443.2-249.4c-1.42109e-14-91 73.8-164.8 164.8-164.8 91,0 164.8,73.8 164.8,164.8s-73.8,164.8-164.8,164.8c-91,0-164.8-73.8-164.8-164.8z"
+                        d="m495,466.1l-119.2-119.2c29.1-35.5 46.5-80.8 46.5-130.3 0-113.5-92.1-205.6-205.6-205.6-113.6,0-205.7,92.1-205.7,205.7s92.1,205.7 205.7,205.7c49.4,0 94.8-17.4 130.3-46.5l119.1,119.1c8,0 20.9,8 28.9,0 8-8 8-20.9 0-28.9zm-443.2-249.4c-1.42109e-14-91 73.8-164.8 164.8-164.8 91,0 164.8,73.8 164.8,164.8s-73.8,164.8-164.8,164.8c-91,0-164.8-73.8-164.8-164.8z"
                       ></path>
                     </g>
                   </g>
@@ -48,8 +48,6 @@
               </button>
             </div>
           </div>
-
-
           <div class="flex items-center space-x-4">
             <div class="relative">
               <button class="text-sm flex items-center">
@@ -89,7 +87,7 @@
               </svg>
               <span
                 class="absolute top-0 right-0 bg-red-500 text-xs text-white rounded-full px-1"
-                >2</span
+                >{{ cartItems }}</span
               >
             </a>
           </div>
@@ -101,7 +99,6 @@
       <div
         class="container mx-auto flex items-center justify-center py-3 px-6 space-x-6"
       >
-
         <div class="relative group">
           <button
             class="bg-gray-700 px-4 py-2 rounded-full text-sm flex items-center hover:bg-gray-600"
@@ -137,24 +134,21 @@
             </svg>
           </button>
           <div
-            class="absolute left-0 mt-2 bg-white text-black py-2 w-48 rounded shadow-lg hidden group-hover:block"
+            class="absolute left-0 top-full bg-white text-black py-2 w-48 rounded shadow-lg hidden group-hover:block"
           >
-            <a href="#" class="block px-4 py-2 hover:bg-gray-200"
-              >Electronics</a
+            <a
+              v-for="category in categories"
+              :key="category"
+              @click.prevent="handleCategoryClick(category)"
+              href="#"
+              class="block px-4 py-2 hover:bg-gray-200"
             >
-            <a href="#" class="block px-4 py-2 hover:bg-gray-200">Fashion</a>
-            <a href="#" class="block px-4 py-2 hover:bg-gray-200"
-              >Home & Garden</a
-            >
-            <a href="#" class="block px-4 py-2 hover:bg-gray-200">Toys</a>
-            <a href="#" class="block px-4 py-2 hover:bg-gray-200">Sports</a>
+              {{ category }}
+            </a>
           </div>
         </div>
 
-        <a
-          href="#"
-          class="text-sm bg-black px-3 py-1 rounded-full text-red-500"
-        >
+        <a href="#" class="text-sm bg-black px-3 py-1 rounded-full text-red-500">
           3 from $0.99
         </a>
         <a
@@ -182,7 +176,6 @@
           class="text-sm px-3 py-2 hover:bg-gray-600 hover:rounded-full"
           >AIExpress Business</a
         >
-
         <div class="relative">
           <button
             class="text-sm px-3 py-2 hover:bg-gray-600 hover:rounded-full flex items-center"
@@ -216,14 +209,32 @@
   </header>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
   name: "Header",
-};
+  data() {
+    return {
+      cartItems: 2,
+      categories: ["Electronics", "Fashion", "Home & Garden", "Toys", "Sports"],
+    };
+  },
+  methods: {
+    handleCategoryClick(category: string) {
+      console.log(`Category selected: ${category}`);
+    },
+  },
+});
 </script>
 
 <style scoped>
 .relative:hover .hidden {
   display: block;
 }
+.group:hover .hidden {
+  display: block;
+}
 </style>
+
+                      
