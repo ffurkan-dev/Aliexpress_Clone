@@ -31,11 +31,13 @@
     >
       <button
         class="flex-1 py-2 text-sm font-medium text-white bg-gray-800 rounded shadow-md hover:bg-gray-700"
+        @click="handleButtonClick('Ön izlemeyi görüntüle')"
       >
         Ön izlemeyi görüntüle
       </button>
       <button
         class="flex-1 py-2 text-sm font-medium text-white bg-gray-800 rounded shadow-md hover:bg-gray-700"
+        @click="handleButtonClick('Benzer ürünler')"
       >
         Benzer ürünler
       </button>
@@ -43,11 +45,18 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
   name: "ProductCard",
-};
+  methods: {
+    handleButtonClick(action: string): void {
+      alert(`${action} butonuna tıklandı!`);
+    },
+  },
+});
 </script>
 
-<style scoped>  
+<style scoped>
 </style>
