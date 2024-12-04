@@ -6,9 +6,7 @@
       <p class="text-sm">3 from $0.99</p>
     </div>
 
-
     <div class="relative mt-2 overflow-hidden">
-
       <button
         class="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 p-2 bg-yellow-300 rounded-full shadow-md hover:bg-yellow-400"
         @click="prevSlide"
@@ -26,7 +24,8 @@
           class="w-1/4 flex-shrink-0 px-2 box-border"
         >
           <div
-            class="bg-gray-100 p-4 rounded-lg shadow-md flex flex-col items-center h-full"
+            class="bg-gray-100 p-4 rounded-lg shadow-md flex flex-col items-center h-full cursor-pointer hover:bg-gray-200 transition"
+            @click="handleProductClick(item)"
           >
             <img
               :src="item.image"
@@ -61,7 +60,6 @@ import { defineComponent, ref } from "vue";
 export default defineComponent({
   name: "Carousel",
   setup() {
-
     const items = ref([
       {
         name: "Table",
@@ -120,20 +118,29 @@ export default defineComponent({
         image: "https://ae-pic-a1.aliexpress-media.com/kf/S8e9047c28c8a4e198199ed08580fd257z.jpg_480x480.jpg_.webp",
       },
     ]);
+
     const currentIndex = ref(0);
     const itemsPerPage = 4;
     const totalPages = Math.ceil(items.value.length / itemsPerPage);
+
     const nextSlide = () => {
       currentIndex.value = (currentIndex.value + 1) % totalPages;
     };
+
     const prevSlide = () => {
       currentIndex.value = (currentIndex.value - 1 + totalPages) % totalPages;
     };
+
+    const handleProductClick = (item: { name: string }) => {
+      alert(`Ürüne tıklandı: ${item.name}`);
+    };
+
     return {
       items,
       currentIndex,
       nextSlide,
       prevSlide,
+      handleProductClick,
     };
   },
 });
